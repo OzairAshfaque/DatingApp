@@ -9,11 +9,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace src.API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+
+    public class UsersController : BaseApiController
     {
-        public IConfiguration Configuration {get;}
+        private  IConfiguration Configuration {get;}
         private readonly DataContext _context;
         public UsersController(DataContext context, IConfiguration config)
         {
@@ -23,7 +22,7 @@ namespace src.API.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
-         return  await _context.Users.ToListAsync();
+         return   Ok(Configuration["TokenKey"]);// _context.Users.ToListAsync();
      
         
 

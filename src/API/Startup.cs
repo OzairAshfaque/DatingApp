@@ -13,15 +13,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using src.API.Interfaces;
+using src.API.Services;
 
 namespace API
 {
     public class Startup
     {
         private readonly IConfiguration _config;
+   //     private readonly ITokenService _tokenService;
         public Startup(IConfiguration config)
         {
             _config = config;
+            
             
         }
 
@@ -35,8 +39,10 @@ namespace API
          
             });
 
+            services.AddScoped<ITokenService, TokenService>();
             services.AddControllers();
-
+            services.AddCors();
+           
 
             // services.AddSwaggerGen(c =>
             // {
@@ -58,6 +64,8 @@ namespace API
 
             app.UseRouting();
 
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
