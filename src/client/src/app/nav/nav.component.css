@@ -1,0 +1,12 @@
+.dropdown-toggle, .dropdown-item, .user-dropdown {
+    cursor : pointer;
+}
+.user-dropdown a{
+    text-decoration: none;
+    color:#212529;
+    text-align: center;
+    margin-left: 20%;
+}
+.user-dropdown a:hover{
+    color: hotpink;
+}
